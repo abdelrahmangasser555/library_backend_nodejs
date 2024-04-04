@@ -7,12 +7,15 @@ const Book = require("./book");
 const bodyParser = require("body-parser");
 app.use(cors());
 app.use(bodyParser.json());
+app.set("view engine", "ejs");
 // this is the backend for a book store app
-app.use(middleWare);
-
+// set up static files in the public folder
+app.use(express.static("public"));
 app.get("/", (req, res) => {
-  res.send("Welcome to the book store");
+  res.render("home");
 });
+
+app.use(middleWare);
 
 app.post("/addBook", async (req, res) => {
   try {
